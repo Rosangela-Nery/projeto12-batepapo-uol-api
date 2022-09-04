@@ -17,4 +17,25 @@ app.post('/participants', (req, res) => {
     res.send('status 422');
 });
 
+app.get('/participants', (req, res) => {
+
+    console.log(participantes)
+    res.send(participantes);
+});
+
+app.post('/messages', (req, res) => {
+    const { to, text, type } = req.body;
+    mensagens.push({ to, text, type });
+
+    console.log(mensagens);
+
+    res.send('status 422');
+});
+
+app.get('/messages', (req, res) => {
+    const limit = mensagens.slice(-100);
+    console.log(limit)
+    res.send(limit);
+});
+
 app.listen(5000, () => console.log('Listening on port 5000'));
