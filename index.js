@@ -12,9 +12,12 @@ app.post('/participants', (req, res) => {
     const { name } = req.body;
     participantes.push({ name });
 
-    console.log(participantes);
+    if(!name) {
+        res.sendStatus(422);
+        return;
+    }
 
-    res.send('status 422');
+    res.send(201);
 });
 
 app.get('/participants', (req, res) => {
@@ -27,13 +30,17 @@ app.post('/messages', (req, res) => {
     const { to, text, type } = req.body;
     mensagens.push({ to, text, type });
 
-    console.log(mensagens);
+    if(!to || !text || !type) {
+        res.sendStatus(422);
+        return;
+    }
 
-    res.send('status 422');
+    res.send(201);
 });
 
 app.get('/messages', (req, res) => {
     const limit = mensagens.slice(-100);
+
     console.log(limit)
     res.send(limit);
 });
